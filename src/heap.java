@@ -71,4 +71,32 @@ public class Heap {
             }
         }
     }
+
+    private void buildHeap() {
+        for (int i = size / 2; i >= 1; i--) {
+            heapify(i);
+        }
+    }
+
+    private void heapify(int i) {
+        int smallest = i;
+        int left = 2 * i;
+        int right = 2 * i + 1;
+        if (left <= size && keys[left] < keys[smallest]) smallest = left;
+        if (right <= size && keys[right] < keys[smallest]) smallest = right;
+        if (smallest != i) {
+            swap(i, smallest);
+            heapify(smallest);
+        }
+    }
+
+    private void swap(int i, int j) {
+        int tempKey = keys[i];
+        keys[i] = keys[j];
+        keys[j] = tempKey;
+
+        int tempId = ids[i];
+        ids[i] = ids[j];
+        ids[j] = TempId;
+    }
 }
