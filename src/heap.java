@@ -18,36 +18,57 @@ public class Heap {
 
     // Initialize the heap with given keys
     public void heap_ini(int[] keys, int n) {
-        // Implementation
+        this.keys = new int[n+1];
+        this.ids = new int[n+1];
+        System.arraycopy(keys, 0, this.keys, 1, n);
+        for (int i = 1; i <= n; i++) {
+            this.ids[i] = i;
+        }
+        this.size = n;
+        buildHeap();
     }
 
     // Check if element with given id is in the heap
-    public void in_heap(int id) {
-        // Implementation
+    public boolean in_heap(int id) {
+        return id <= size && id > 0;
     }
 
     // Return the minimum key of the heap
-    public void min_key() {
-        // Implementation
+    public int min_key() {
+        if (size > 0) return keys[1];
+        else return -1;
     }
 
     // Return the id of the element with minimum key
-    public void min_id() {
-        // Implementation
+    public int min_id() {
+        if (size > 0) return ids[1];
+        else return -1;
     }
 
     // Return the key of the element with given id
-    public void key(int id) {
-        // Implementation
+    public int key(int id) {
+        if (id <= size && id > 0) return keys[id];
+        else return -1;
     }
 
     // Delete the element with minimum key from the heap
     public void delete_min() {
-        // Implementation
+        if (size > 0) {
+            keys[1] = keys[size];
+            ids[1] = ids[size];
+            size--;
+            heapify(1);
+        }
     }
 
     // Decrease the key of the element with given id to new_key
     public void decrease_key(int id, int new_key) {
-        // Implementation
+        if (id > 0 && id <= size && keys[id] > new_key) {
+            keys[id] = new_key;
+            while (id > 1 && keys[id / 2] > keys[id]) {
+                swap(id, id / 2);
+                id = id / 2;
+            }
+        }
     }
 }
