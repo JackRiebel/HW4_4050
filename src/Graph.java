@@ -26,6 +26,16 @@ public class Graph {
     public int getSize(){
         return V;
     }
+    public void printAdjacencies(){
+        System.out.println("\n\nAdjacency List:\n-------------");
+        for(int i = 1; i <= V; i++){
+            System.out.println("\nVertex " + i + ":");
+            List<Edge> currentEdges = adjacencyList.get(i);
+            for(int j = 0; j < currentEdges.size(); j++){
+                System.out.println("Connected to Vertex " + currentEdges.get(j).findOtherV(i) + " with weight " + currentEdges.get(j).getLength());
+            }
+        }
+    }
     public List<Edge> getAdjacencies(int vertex){
         return this.adjacencyList.get(vertex);
     }

@@ -10,7 +10,6 @@ public class Main {
             Scanner fReader = new Scanner(f);
             String countStr = fReader.nextLine();
             int count = Integer.parseInt(countStr);
-            System.out.println(count);
             ArrayList<String> data = new ArrayList<String>();
             while(fReader.hasNext()){
                 data.add(fReader.nextLine());
@@ -29,6 +28,7 @@ public class Main {
                 Edge newEdge = new Edge(V1, V2, weight);
                 myGraph.addEdge(newEdge);
             }
+            myGraph.printAdjacencies();
             Prims(myGraph);
         }
         catch(FileNotFoundException e){
@@ -37,6 +37,7 @@ public class Main {
    }
    //Prints the edges of the MST of graph g
     public static void Prims(Graph g){
+        System.out.println("\n\n\nMinimum Spanning Tree using Prim's Algorithm\n--------------------------------------------");
         int size = g.getSize();
         int[] isKnown = new int[size+1];
         float[] D = new float[size+1];
