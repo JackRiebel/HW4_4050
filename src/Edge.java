@@ -28,4 +28,7 @@ public class Edge {
     public void printInfo(){
         System.out.println("(" + V1 + ", " + V2 + "). Weight = " + length);
     }
+    public void Prims(Graph g){
+
+    }
 }

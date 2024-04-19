@@ -23,6 +23,12 @@ public class Graph {
         this.adjacencyList.get(V1).add(newEdge);
         this.adjacencyList.get(V2).add(newEdge);
     }
+    public int getSize(){
+        return V;
+    }
+    public List<Edge> getAdjacencies(int vertex){
+        return this.adjacencyList.get(vertex);
+    }
     public void Prims(Graph g){
         int size = V;
         int[] isKnown = new int[size+1];
