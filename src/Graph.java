@@ -16,17 +16,16 @@ public class Graph {
             adjacencyList.put(i, new ArrayList<>());
         }
     }
+    //Adds an edge to the adjacencyList of both vertices attached to the given edge.
     public void addEdge(Edge newEdge){
         int V1 = newEdge.getV1();
         int V2 = newEdge.getV2();
         this.adjacencyList.get(V1).add(newEdge);
         this.adjacencyList.get(V2).add(newEdge);
     }
-    public Edge[] findEdges(int V){
-        return null;
-    }
     public void Prims(Graph g){
         int size = V;
+        int count = 0;
         float totalWeight = 0;
         int[] isKnown = new int[size+1];
         float[] D = new float[size+1];
@@ -41,34 +40,28 @@ public class Graph {
             isKnown[currentV] = 1;
             float dist = myHeap.key(myHeap.findId(currentV));
             myHeap.delete_min();
-            System.out.println("\n\nCurrent Vertex: " + currentV + ". Length = " + dist + ".");
             List<Edge> currentEdges = this.adjacencyList.get(currentV);
             Edge theEdge = null;
             for(int i = 0; i < currentEdges.size(); i++){
                 Edge itrEdge = currentEdges.get(i);
-                //System.out.println("Current Edge: (" + itrEdge.getV1() + ", " + itrEdge.getV2() + "). len = " + itrEdge.getLength());
                 if(itrEdge.getLength() == dist){
                     theEdge = itrEdge;
                     totalWeight = totalWeight + theEdge.getLength();
+                    count++;
                     theEdge.printInfo();
                 }
                 else{
                     int otherV = itrEdge.findOtherV(currentV);
                     if(isKnown[otherV] == 0){
+                        //If this is a new edge
                         if(itrEdge.getLength() < D[otherV]){
+                            //If this edge provides a shorter path to the vertex, decrease that vertex's key in the heap.
                             D[otherV] = itrEdge.getLength();
-                            //System.out.println("D[" + otherV + "]: " + D[otherV] + "\nitrEdge.getLength(): " + itrEdge.getLength());
-                            //System.out.println("myheap.findId(otherV) = " + myHeap.findId(otherV));
                             myHeap.decrease_key(myHeap.findId(otherV), itrEdge.getLength());
                         }
                     }
                 }
             }
         }
-        System.out.println(totalWeight);
     }
-
-
-
-    // Other methods of the Graph class...
 }

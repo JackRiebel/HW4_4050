@@ -15,12 +15,9 @@ public class Main {
             while(fReader.hasNext()){
                 data.add(fReader.nextLine());
             }
-            for(int i = 0; i < 22; i++){
-                System.out.println(data.get(i));
-            }
             Graph myGraph = new Graph(count);
             ArrayList<Edge> myEdges= new ArrayList<Edge>();
-            for(int i = 0; i < count; i++){
+            for(int i = 0; i < data.size(); i++){
                 String[] splitData = data.get(i).split("\\s+");
                 int x = 0;
                 if(splitData.length == 4){
@@ -30,6 +27,7 @@ public class Main {
                 int V2 = Integer.parseInt(splitData[1+x]);
                 float weight = Float.parseFloat(splitData[2+x]);
                 Edge newEdge = new Edge(V1, V2, weight);
+               // newEdge.printInfo();
                 myGraph.addEdge(newEdge);
             }
             myGraph.Prims(myGraph);
