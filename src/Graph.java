@@ -25,8 +25,6 @@ public class Graph {
     }
     public void Prims(Graph g){
         int size = V;
-        int count = 0;
-        float totalWeight = 0;
         int[] isKnown = new int[size+1];
         float[] D = new float[size+1];
         for(int i = 1; i < size+1; i++) {
@@ -46,8 +44,6 @@ public class Graph {
                 Edge itrEdge = currentEdges.get(i);
                 if(itrEdge.getLength() == dist){
                     theEdge = itrEdge;
-                    totalWeight = totalWeight + theEdge.getLength();
-                    count++;
                     theEdge.printInfo();
                 }
                 else{
